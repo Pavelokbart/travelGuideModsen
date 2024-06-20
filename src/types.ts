@@ -23,6 +23,7 @@ export interface MarkerPopupProps {
   position: LatLngExpression;
   buildRoute: (position: LatLngExpression, callback: (distance: number, duration: number) => void) => void;
   distance?: number;
+  xid: string;
   duration?: number;
 }
 
@@ -51,4 +52,14 @@ export interface Feature {
 export interface ApiResponse {
   features: Feature[];
 }
-
+export interface DetailedPlaceInfo {
+  name: string;
+  description?: string;
+  image?: string;
+  wikipedia?: string;
+  address?: string;
+}
+export interface DetailedPlaceInfoProps {
+  xid: string;
+  onClose: () => void;
+}

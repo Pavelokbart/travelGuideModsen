@@ -3,6 +3,7 @@ import polyline from '@mapbox/polyline';
 import { ApiResponse } from '../types';
 import { UserLocation } from '../types';
 import { MarkerData } from '../types';
+import { DetailedPlaceInfo } from '../types';
 
 const fetchMarkers = async (category: string, lat: number, lng: number, radius: number): Promise<MarkerData[]> => {
   let kinds = '';
@@ -74,4 +75,24 @@ const buildRoute = (userLocation: UserLocation | null, destination: LatLngExpres
   request.send(body);
 };
 
-export { fetchMarkers, buildRoute };
+const fetchPlaceDetails = async (xid: string): Promise<DetailedPlaceInfo | null> => {
+  const apiKey = '5ae2e3f221c38a28845f05b692c2b88ed6e6285f06ed260b57075108';
+  const response = await fetch(`https://api.opentripmap.com/0.1/en/places/xid/${xid}?apikey=${apiKey}`);
+  const data = await response.json();
+  console.log(data);
+
+  if (data) {
+    return {
+      name: data.name,
+      description: data.info?.descr,
+      image: data.image,
+      wikipedia: data.wikipedia,
+      address: data.address?.road ? `${data.address.road}, ${data.address.house_number} ${data.address.city}` : data.address?.city,
+    };
+  } else {
+    console.error('No detailed information found for xid', xid);
+    return null;
+  }
+};
+
+export { fetchMarkers, buildRoute,fetchPlaceDetails };
