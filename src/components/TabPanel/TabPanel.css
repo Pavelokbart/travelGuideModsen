@@ -95,4 +95,29 @@
 
 
 }
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-list button {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.category-list button:hover {
+  background-color: #f0f0f0;
+}
+
+.category-list button span {
+  margin-left: 10px;
+}
   

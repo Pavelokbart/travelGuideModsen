@@ -4,6 +4,9 @@ import { LogoIcon } from '../../Icons/LogoIcon';
 import { SearchIcon } from '../../Icons/SearchIcon';
 import { FavoriteIcon } from '../../Icons/FavoriteIcon';
 import { SearchBtnIcon } from '../../Icons/SearchBtnIcon';
+import { GardenIcon } from '../../Icons/GardenIcon';
+import { ReligionIconForSearch } from '../../Icons/ReligionIconForSearch';
+import { MuseumIconForSearch } from '../../Icons/MuseumIconForSearch';
 
 interface TabPanelProps {
   setCategory: (category: string) => void;
@@ -38,12 +41,21 @@ const TabPanel: React.FC<TabPanelProps> = ({ setCategory, setRadius }) => {
           <div className="sidebar-content">
             <input className='search_input' type="text" placeholder="Место, адрес.." />
             <p>Искать:</p>
-            <select onChange={(e) => setCategory(e.target.value)}>
+            <div className="category-list">
+              
+              <button onClick={() => setCategory('museums')}><MuseumIconForSearch/><span>Museums</span></button>
+              <button onClick={() => setCategory('parks')}><GardenIcon/><span>Parks</span></button>
+              <button onClick={() => setCategory('religion')}><ReligionIconForSearch/><span>religion</span></button>
+              
+            </div>
+
+
+            {/* <select onChange={(e) => setCategory(e.target.value)}>
               <option value="all">All</option>
               <option value="museums">Museums</option>
               <option value="parks">Parks</option>
               <option value="religion">Religion</option>
-            </select>
+            </select> */}
           </div>
           <div className="radius-input">
             <div className="radius_txt">В Радиусе (км)</div>
