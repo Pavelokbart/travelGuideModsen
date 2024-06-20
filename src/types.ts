@@ -32,6 +32,9 @@ export interface MapProps {
   category: string;
   radius:number
 }
+export interface MapPropsWithSearch extends MapProps {
+  searchResult: MarkerData | null;
+}
 
 export interface FeatureProperties {
   id: string;

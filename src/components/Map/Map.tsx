@@ -1,11 +1,8 @@
-// В файл Map.tsx
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Polyline, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
 import L, { LatLngExpression } from 'leaflet';
-import { LocateUserProps, MarkerData, UserLocation } from '../../types';
-import polyline from '@mapbox/polyline';
+import { MarkerData, UserLocation } from '../../types';
 import MarkerPopup from '../MarkerPopup/MarkerPopup';
-import { ApiResponse } from '../../types';
 import LocateUser from '../LocateUser/LocateUser';
 import museumIconSvg from '../../Icons/museumIcon';
 import religionIconSvg from '../../Icons/religionIcon';
@@ -16,7 +13,7 @@ import { DefaultIcon, CustomIcon } from '../../utils/iconUtils';
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const Map: React.FC<MapProps> = ({ category, radius }) => {
+const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({ category, radius, searchResult }) => {
   const [markers, setMarkers] = useState<MarkerData[]>([]);
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
   const [route, setRoute] = useState<LatLngExpression[]>([]);
@@ -34,6 +31,9 @@ const Map: React.FC<MapProps> = ({ category, radius }) => {
     if (category.includes('religion')) return CustomIcon(religionIconSvg);
     return DefaultIcon;
   };
+  console.log('res')
+  console.log(searchResult)
+  
 
   return (
     <MapContainer center={userLocation ? [userLocation.lat, userLocation.lng] : [51.505, -0.09]} zoom={13} style={{ height: '100%', width: '100%' }}>
@@ -53,6 +53,16 @@ const Map: React.FC<MapProps> = ({ category, radius }) => {
         </Marker>
       ))}
       {route.length > 0 && <Polyline positions={route} color="blue" />}
+      {searchResult && (
+        <Marker position={searchResult.position}>
+          <MarkerPopup
+            name={searchResult.name}
+            position={searchResult.position}
+            buildRoute={() => {}}
+            xid={searchResult.id}
+          />
+        </Marker>
+      )}
     </MapContainer>
   );
 };
