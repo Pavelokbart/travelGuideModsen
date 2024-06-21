@@ -1,3 +1,4 @@
+import React from 'react';
 const GardenIcon=()=>{
     return (<svg width="30" height="30" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="3" y="3" width="40" height="40" rx="20" fill="#62B944"/>

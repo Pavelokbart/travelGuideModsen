@@ -1,5 +1,5 @@
 import './Favorite.css';
-
+import React from 'react';
 const Favorite = () => {
   return(
     <div className="favoriteblock">

@@ -1,3 +1,4 @@
+import React from 'react';
 const FavoriteIcon=()=>{
     return (<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="1.5" y="1.5" width="57" height="57" rx="4.5" stroke="#C4C4C4" stroke-width="3"/>

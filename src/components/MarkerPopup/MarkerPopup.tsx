@@ -31,6 +31,7 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({ name, position, xid, buildRou
         <br />
         <button onClick={handleBuildRoute} className="popup-button">Build Route</button>
         <button onClick={handleShowDetails} className="popup-button">Show Details</button>
+        <button onClick={handleShowDetails} className="popup-button">Add to favorite</button>
         {routeDetails && (
           <div className="route-details">
             <p>Distance: {(routeDetails.distance / 1000).toFixed(2)} km</p>
