@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import Map from './components/Map/Map';
-import TabPanel from './components/TabPanel/TabPanel';
 import MapWithTab from './components/MapWithTab/MapWithTab';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
+import AuthDetails from './components/AuthDetails/AuthDetails';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-  
-
   return (
-    <div className="App">
-      <MapWithTab/>
-      
-      
+    <div >
+      <BrowserRouter>
+        <Routes>
+          <Route path='/sign-in' element={<SignIn />} />
+          <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/auth' element={<AuthDetails />} />
+          
+          <Route path='/map' element={<MapWithTab />} />
+         
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }

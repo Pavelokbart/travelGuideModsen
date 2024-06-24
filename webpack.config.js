@@ -8,7 +8,8 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     static: './public',
-    port: 9000
+    port: 9000,
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -26,7 +27,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
-  
+
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),

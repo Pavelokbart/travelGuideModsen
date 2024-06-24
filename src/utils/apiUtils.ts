@@ -4,17 +4,27 @@ import { ApiResponse } from '../types';
 import { UserLocation } from '../types';
 import { MarkerData } from '../types';
 import { DetailedPlaceInfo } from '../types';
+import { Console } from 'console';
 
 const fetchMarkers = async (category: string, lat: number, lng: number, radius: number): Promise<MarkerData[]> => {
-  let kinds = '';
-  if (category === 'museums') kinds = 'museums';
-  else if (category === 'parks') kinds = 'gardens_and_parks';
-  else if (category === 'religion') kinds = 'religion';
-
+  let kinds = 'interesting_places';
+   if (category === 'religion') kinds = 'religion';
+  else if (category === 'cultural') kinds = 'cultural';
+  
+  else if (category === 'architecture') kinds = 'architecture';
+  else if (category === 'natural') kinds = 'natural';
+  
+  else if (category === 'historic') kinds = 'historic';
+  else if (category === 'industrial_facilities') kinds = 'industrial_facilities';
+  else if (category === 'architecture') kinds = 'architecture';
+  else if (category === 'other') kinds = 'other';
+  
+  
   const apiKey = '5ae2e3f221c38a28845f05b692c2b88ed6e6285f06ed260b57075108';
   const response = await fetch(`https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${lng}&lat=${lat}&kinds=${kinds}&apikey=${apiKey}`);
   const data: ApiResponse = await response.json();
 
+  console.log(data.features)
   if (data && data.features) {
     return data.features.map((feature) => ({
       id: feature.id,
@@ -26,6 +36,8 @@ const fetchMarkers = async (category: string, lat: number, lng: number, radius: 
     console.error('No features found in API response', data);
     return [];
   }
+  
+
 };
 
 const buildRoute = (userLocation: UserLocation | null, destination: LatLngExpression, callback: (distance: number, duration: number) => void, setRoute: (route: LatLngExpression[]) => void, setRouteInfo: (info: { distance: number, duration: number }) => void) => {

@@ -25,6 +25,7 @@ export interface MarkerPopupProps {
   distance?: number;
   xid: string;
   duration?: number;
+  clearRoute: () => void;
 }
 
 

@@ -10,6 +10,10 @@ import parkIconSvg from '../../Icons/parkIcon';
 import { MapProps } from '../../types';
 import { fetchMarkers, buildRoute } from '../../utils/apiUtils';
 import { DefaultIcon, CustomIcon } from '../../utils/iconUtils';
+import historicIconSvg from '../../Icons/historicIcon';
+import industrialIconSvg from '../../Icons/industialIcon';
+import architectureIconSvg from '../../Icons/architectureIcon';
+import otherIconSvg from '../../Icons/otherIcon';
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
@@ -19,16 +23,59 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({ categor
   const [route, setRoute] = useState<LatLngExpression[]>([]);
   const [routeInfo, setRouteInfo] = useState<{ distance: number, duration: number } | null>(null);
 
+  
+
+
+  
+
   useEffect(() => {
     if (userLocation) {
       fetchMarkers(category, userLocation.lat, userLocation.lng, radius).then(setMarkers);
     }
   }, [category, userLocation, radius]);
 
-  const getIconForCategory = (category: string) => {
-    if (category.includes('museums')) return CustomIcon(museumIconSvg);
-    if (category.includes('gardens_and_parks')) return CustomIcon(parkIconSvg);
-    if (category.includes('religion')) return CustomIcon(religionIconSvg);
+  const categoryPriority = [
+    'cultural',
+    'natural',
+    'religion',
+    'historic',
+    'architecture',
+    
+    
+    
+    
+    'industrial_facilities',
+    'natural',
+    
+    'other'
+  ];
+  const clearRoute = () => {
+    setRoute([]);
+    setRouteInfo(null);
+  };
+  
+  const getHighestPriorityCategory = (categories:string) => {
+    const categoryList = categories.split(',');
+    for (let i = 0; i < categoryPriority.length; i++) {
+      if (categoryList.includes(categoryPriority[i])) {
+        return categoryPriority[i];
+      }
+    }
+    return 'other'; // default category if none match
+  };
+  
+  const getIconForCategory = (categoryString:string) => {
+
+    const highestPriorityCategory = getHighestPriorityCategory(categoryString);
+  
+    if (highestPriorityCategory === 'historic') return CustomIcon(historicIconSvg);
+    else if (highestPriorityCategory === 'industrial_facilities') return CustomIcon(industrialIconSvg);
+    else if (highestPriorityCategory === 'architecture') return CustomIcon(architectureIconSvg);
+    else if (highestPriorityCategory === 'cultural') return CustomIcon(museumIconSvg);
+    else if (highestPriorityCategory === 'natural') return CustomIcon(parkIconSvg);
+    else if (highestPriorityCategory === 'religion') return CustomIcon(religionIconSvg);
+    else if (highestPriorityCategory === 'other') return CustomIcon(otherIconSvg);
+  
     return DefaultIcon;
   };
   console.log('res')
@@ -47,7 +94,8 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({ categor
           <MarkerPopup 
             name={marker.name} 
             position={marker.position} 
-            xid={marker.id} // Передача xid
+            xid={marker.id}
+            clearRoute={clearRoute}  // Передача xid
             buildRoute={(destination, callback) => buildRoute(userLocation, destination, callback, setRoute, setRouteInfo)}
           />
         </Marker>
@@ -60,9 +108,11 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({ categor
             position={searchResult.position}
             buildRoute={() => {}}
             xid={searchResult.id}
+            clearRoute={clearRoute} 
           />
         </Marker>
       )}
+      
     </MapContainer>
   );
 };

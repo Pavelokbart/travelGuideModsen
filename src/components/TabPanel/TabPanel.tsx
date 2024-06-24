@@ -8,6 +8,13 @@ import { GardenIcon } from '../../Icons/GardenIcon';
 import { ReligionIconForSearch } from '../../Icons/ReligionIconForSearch';
 import { MuseumIconForSearch } from '../../Icons/MuseumIconForSearch';
 import Favorite from '../Favorite/Favorite';
+import { HistoricIconForSearch } from '../../Icons/HistoricIconForSearch';
+import { IndustrialIconForSearch } from '../../Icons/IndustrialIconForSearch';
+import { ArchitectureIconForSearch } from '../../Icons/ArchitectureIconForSearch';
+import { OtherIconForSearch } from '../../Icons/otherIconForSearch';
+import { Link } from "react-router-dom";
+
+
 
 interface TabPanelProps {
   setCategory: (category: string) => void;
@@ -47,7 +54,10 @@ const TabPanel: React.FC<TabPanelProps> = ({ setCategory, setRadius, onSearch })
       <div className="tabpanel_btn">
         <button className='search_btn' onClick={() => toggleSidebar(false)}><SearchIcon /></button>
         <button className='favorite-btn' onClick={() => toggleSidebar(true)}><FavoriteIcon /></button>
+        
       </div>
+      <Link to='/auth'>User</Link>
+
       {isSidebarOpen && (
         <div className="sidebar">
           <button className="close-btn" onClick={() => setIsSidebarOpen(false)}>✖</button>
@@ -63,9 +73,15 @@ const TabPanel: React.FC<TabPanelProps> = ({ setCategory, setRadius, onSearch })
                 />
                 <p>Искать:</p>
                 <div className="category-list">
-                  <button onClick={() => setCategory('museums')}><MuseumIconForSearch /><span>Museums</span></button>
-                  <button onClick={() => setCategory('parks')}><GardenIcon /><span>Parks</span></button>
+                
+                  <button onClick={() => setCategory('cultural')}><MuseumIconForSearch /><span>Cultural</span></button>
+                  <button onClick={() => setCategory('natural')}><GardenIcon /><span>Natural</span></button>
                   <button onClick={() => setCategory('religion')}><ReligionIconForSearch /><span>Religion</span></button>
+                  <button onClick={() => setCategory('historic')}><HistoricIconForSearch /><span>Historic</span></button>
+                  <button onClick={() => setCategory('industrial_facilities')}><IndustrialIconForSearch/><span>Industrial</span></button>
+                  <button onClick={() => setCategory('architecture')}><ArchitectureIconForSearch/><span>Architecture</span></button>
+                  <button onClick={() => setCategory('other')}><OtherIconForSearch/><span>Other</span></button>
+                  
                 </div>
                 <div className="radius-input">
                 <div className="radius_txt">В Радиусе (км)</div>
