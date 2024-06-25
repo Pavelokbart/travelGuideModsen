@@ -5,8 +5,17 @@ import './MarkerPopup.css';
 import { MarkerPopupProps } from '../../types';
 import DetailedInfo from '../DetailedInfo/DetailedInfo';
 
-const MarkerPopup: React.FC<MarkerPopupProps> = ({ name, position, xid, buildRoute, clearRoute }) => {
-  const [routeDetails, setRouteDetails] = useState<{ distance: number; duration: number } | null>(null);
+const MarkerPopup: React.FC<MarkerPopupProps> = ({
+  name,
+  position,
+  xid,
+  buildRoute,
+  clearRoute,
+}) => {
+  const [routeDetails, setRouteDetails] = useState<{
+    distance: number;
+    duration: number;
+  } | null>(null);
   const [showDetails, setShowDetails] = useState(false);
 
   const handleBuildRoute = () => {
@@ -33,10 +42,18 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({ name, position, xid, buildRou
       <div className="popup-content">
         <strong>{name}</strong>
         <br />
-        <button onClick={handleBuildRoute} className="popup-button">Build Route</button>
-        <button onClick={handleShowDetails} className="popup-button">Show Details</button>
-        <button onClick={handleShowDetails} className="popup-button">Add to favorite</button>
-        <button onClick={handleClearRoute} className="popup-button">Clear Route</button>
+        <button onClick={handleBuildRoute} className="popup-button">
+          Build Route
+        </button>
+        <button onClick={handleShowDetails} className="popup-button">
+          Show Details
+        </button>
+        <button onClick={handleShowDetails} className="popup-button">
+          Add to favorite
+        </button>
+        <button onClick={handleClearRoute} className="popup-button">
+          Clear Route
+        </button>
         {routeDetails && (
           <div className="route-details">
             <p>Distance: {(routeDetails.distance / 1000).toFixed(2)} km</p>

@@ -1,9 +1,9 @@
 .popup-content {
-    text-align: center;
-  }
-  
-  .popup-button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
+  text-align: center;
+}
+
+.popup-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
 }

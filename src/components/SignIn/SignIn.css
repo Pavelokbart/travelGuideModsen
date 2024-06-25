@@ -1,150 +1,121 @@
 @font-face {
-    font-family: "Inter"; 
-    src: url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"); 
-    font-style: normal; 
-    font-weight: normal; 
-  } 
-.wrapper{
-    box-sizing: border-box;
-    
-    font-family: "Bebas Neue", sans-serif;
-    display: flex;
-    justify-content: center;
-    
-  }
-  *,*::after,*::before{
-    box-sizing: inherit ;
-    margin: 0;
-    padding: 0;
-  }
-
-.container{
-    max-width: 1100px;
-    margin: 0 auto;
-    
-    
+  font-family: 'Inter';
+  src: url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+  font-style: normal;
+  font-weight: normal;
 }
-.signform
-{
-    margin-top: 72px;
+.wrapper {
+  box-sizing: border-box;
 
+  font-family: 'Bebas Neue', sans-serif;
+  display: flex;
+  justify-content: center;
 }
-.back_link
-{
-    text-decoration: none; 
-    color: #313037;
-    font-family: Inter;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    text-align: left;
-    
-    font-family: "Bebas Neue", sans-serif;
-
-
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
-.signform_signin
-{
-    margin-top: 32px;
-    font-family: Inter;
-    font-size: 56px;
-    font-weight: 700;
-    line-height: 80px;
-    text-align: left;
-    
-    font-family: "Bebas Neue", sans-serif;
 
-
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
 }
-.forregist
-{
-    width: 544px;
-    height: 56px;
-    
-    background-color: #FFFFFF;
+.signform {
+  margin-top: 72px;
+}
+.back_link {
+  text-decoration: none;
+  color: #313037;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
 
+  font-family: 'Bebas Neue', sans-serif;
+}
+.signform_signin {
+  margin-top: 32px;
+  font-family: Inter;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 80px;
+  text-align: left;
+
+  font-family: 'Bebas Neue', sans-serif;
+}
+.forregist {
+  width: 544px;
+  height: 56px;
+
+  background-color: #ffffff;
 }
 .forregist::placeholder {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
-.signform_form
-{
-    
-    margin-top: 72px;
-    width: 624px;
-    height: 400px;
-    
-   
-    padding-top: 40px;
-    padding-left: 40px;
-    padding-right: 40px;
-    border: 1px solid #DADADA;
-    display: flex;
-    flex-direction: column;
-    
-    font-family: "Bebas Neue", sans-serif;
-    
-    
-    
+.signform_form {
+  margin-top: 72px;
+  width: 624px;
+  height: 400px;
+
+  padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border: 1px solid #dadada;
+  display: flex;
+  flex-direction: column;
+
+  font-family: 'Bebas Neue', sans-serif;
 }
-.form_input{
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    
-    font-family: "Bebas Neue", sans-serif;
+.form_input {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 
+  font-family: 'Bebas Neue', sans-serif;
 }
-.form_forgot
-{
-    margin-top: 16px;
-    
-font-size: 16px;
-font-weight: 400;
-line-height: 20px;
-text-align: left;
+.form_forgot {
+  margin-top: 16px;
 
-font-family: "Bebas Neue", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
 
-
+  font-family: 'Bebas Neue', sans-serif;
 }
-.form_button
-{
-    margin-top: 45px;
-    height: 56px;
-    background: #313037;
-    
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 24px;
-    color: #FFFFFF;
-    border: none;
+.form_button {
+  margin-top: 45px;
+  height: 56px;
+  background: #313037;
+
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #ffffff;
+  border: none;
 }
-.form_accout
-{
-    margin-top: 48px;
-    display: flex;
-    justify-content: center;
-    
-font-size: 16px;
-font-weight: 500;
-line-height: 20px;
-text-align: left;
+.form_accout {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
 
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
 }
-.accout_link
-{
-    
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    text-align: left;
-    color: #313037;
-    
-    text-decoration: none;
-    
+.accout_link {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  color: #313037;
 
-
+  text-decoration: none;
 }

@@ -19,8 +19,16 @@ const DetailedInfo: React.FC<DetailedPlaceInfoProps> = ({ xid, onClose }) => {
       <h2>{placeInfo.name}</h2>
       {placeInfo.image && <img src={placeInfo.image} alt={placeInfo.name} />}
       <p>{placeInfo.description}</p>
-      {placeInfo.address && <p><strong>Address:</strong> {placeInfo.address}</p>}
-      {placeInfo.wikipedia && <a href={placeInfo.wikipedia} target="_blank" rel="noopener noreferrer">Read more on Wikipedia</a>}
+      {placeInfo.address && (
+        <p>
+          <strong>Address:</strong> {placeInfo.address}
+        </p>
+      )}
+      {placeInfo.wikipedia && (
+        <a href={placeInfo.wikipedia} target="_blank" rel="noopener noreferrer">
+          Read more on Wikipedia
+        </a>
+      )}
     </div>
   );
 };

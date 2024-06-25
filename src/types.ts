@@ -21,17 +21,19 @@ export interface LocateUserProps {
 export interface MarkerPopupProps {
   name: string;
   position: LatLngExpression;
-  buildRoute: (position: LatLngExpression, callback: (distance: number, duration: number) => void) => void;
+  buildRoute: (
+    position: LatLngExpression,
+    callback: (distance: number, duration: number) => void,
+  ) => void;
   distance?: number;
   xid: string;
   duration?: number;
   clearRoute: () => void;
 }
 
-
 export interface MapProps {
   category: string;
-  radius:number
+  radius: number;
 }
 export interface MapPropsWithSearch extends MapProps {
   searchResult: MarkerData | null;

@@ -1,109 +1,111 @@
 /* Account.css */
 .account {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .account_title {
-    margin-top: 50px;
-    font-family: 'Bebas Neue';
-    font-size: 56px;
-    font-weight: 700;
-    line-height: 64px;
-    text-align: left;
+  margin-top: 50px;
+  font-family: 'Bebas Neue';
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 64px;
+  text-align: left;
 }
 
 .account_profile {
-    margin-top: 48px;
-    font-family: 'Bebas Neue';
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 32px;
-    text-align: left;
+  margin-top: 48px;
+  font-family: 'Bebas Neue';
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: left;
 }
 
 .account_info {
-    margin-top: 10px;
-    display: flex;
-    gap: 200px;
+  margin-top: 10px;
+  display: flex;
+  gap: 200px;
 }
 
-.info_name, .info_email {
-    font-family: 'Helios';
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 32px;
-    text-align: left;
+.info_name,
+.info_email {
+  font-family: 'Helios';
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: left;
 }
 
-.name_props, .email_props {
-    margin-top: 18px;
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
+.name_props,
+.email_props {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
 }
 
-.block_email, .block_name {
-    width: 400px;
-    height: 56px;
-    border: 1px solid #E7E7E7;
+.block_email,
+.block_name {
+  width: 400px;
+  height: 56px;
+  border: 1px solid #e7e7e7;
 }
 
 .logout_button {
-    border: none;
-    background-color: rgb(42, 39, 39);
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    width: 350px;
-    height: 50px;
-    margin-top: 40px;
+  border: none;
+  background-color: rgb(42, 39, 39);
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  width: 350px;
+  height: 50px;
+  margin-top: 40px;
 }
 
 .logout_button:hover {
-    background-color: #4b4a4d;
+  background-color: #4b4a4d;
 }
 
 .logout_button:active {
-    background-color: #313037;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+  background-color: #313037;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .not-logged-in {
-    text-align: center;
-    margin-top: 50px;
-    font-family: 'Helios';
-    font-size: 20px;
-    font-weight: 600;
+  text-align: center;
+  margin-top: 50px;
+  font-family: 'Helios';
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .login_button {
-    border: none;
-    background-color: rgb(42, 39, 39);
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    width: 200px;
-    height: 50px;
-    margin-top: 20px;
-    cursor: pointer;
+  border: none;
+  background-color: rgb(42, 39, 39);
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  width: 200px;
+  height: 50px;
+  margin-top: 20px;
+  cursor: pointer;
 }
 
 .login_button:hover {
-    background-color: #4b4a4d;
+  background-color: #4b4a4d;
 }
 
 .login_button:active {
-    background-color: #313037;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+  background-color: #313037;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
-.auth_link
-{
-    text-decoration: none;
-    color: white;
+.auth_link {
+  text-decoration: none;
+  color: white;
 }

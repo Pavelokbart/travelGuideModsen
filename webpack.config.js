@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     static: './public',
-    port: 9000,
+    port: 3000,
     historyApiFallback: true,
   },
   module: {
@@ -27,17 +27,21 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
-
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true
+    clean: true,
+    publicPath: '/'
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      filename: 'index.html'
-    })
+      filename: 'index.html',
+      templateParameters: {
+        PUBLIC_URL: '' // Пустая строка заменит %PUBLIC_URL% в HTML-шаблоне
+      }
+    }),
+
   ]
 };
