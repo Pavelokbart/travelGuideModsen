@@ -1,19 +1,40 @@
 import './Favorite.css';
 import React from 'react';
+import { IAttraction } from '../../types';
+import { auth } from '../../firebase';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getFavorites } from '../../utils/apiUtils';
 
-function Favorite() {
+const Favorite = () => {
+  const [favorites, setFavorites] = useState<IAttraction[]>([]);
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const userId = auth.currentUser?.uid;
+      if (userId) {
+        const attractions = await getFavorites(userId);
+        setFavorites(attractions);
+      }
+    };
+
+    fetchFavorites();
+  }, []);
+
   return (
-    <div className="favoriteblock">
-      <div className="favoriteblock_name">
-        Фантаcмагарический музей им. П.М. Машерова
-      </div>
-      <div className="favoriteblock_address">Сурганаво 37</div>
-      <div className="favoriteblock_buttons">
-        <button className="favorite_button">Icon</button>
-        <button className="detail_button" />
-      </div>
+    <div className="favorite-container">
+      {favorites.map((attraction) => (
+        <div key={attraction.id} className="favoriteblock">
+          <div className="favoriteblock_name">{attraction.name}</div>
+
+          <div className="favoriteblock_buttons">
+            <button className="delete_button">Icon</button>
+            <button className="detail_button" />
+          </div>
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default Favorite;

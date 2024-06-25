@@ -69,3 +69,7 @@ export interface DetailedPlaceInfoProps {
   xid: string;
   onClose: () => void;
 }
+export interface IAttraction {
+  id: string;
+  name: string;
+}

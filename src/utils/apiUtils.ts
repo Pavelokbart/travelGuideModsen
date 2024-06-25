@@ -1,12 +1,15 @@
 import { LatLngExpression } from 'leaflet';
 import polyline from '@mapbox/polyline';
 import { Console } from 'console';
+import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { db } from '../firebase';
 import {
   ApiResponse,
   UserLocation,
   MarkerData,
   DetailedPlaceInfo,
 } from '../types';
+import { IAttraction } from '../types';
 
 const fetchMarkers = async (
   category: string,
@@ -138,6 +141,54 @@ const fetchPlaceDetails = async (
   }
   console.error('No detailed information found for xid', xid);
   return null;
+};
+
+const getUserFavoritesRef = (userId: string) => doc(db, 'favorites', userId);
+
+export const addAttractionToFavorites = async (
+  userId: string,
+  attraction: IAttraction,
+) => {
+  try {
+    const userFavoritesRef = getUserFavoritesRef(userId);
+    const userFavoritesSnap = await getDoc(userFavoritesRef);
+
+    if (!userFavoritesSnap.exists()) {
+      await setDoc(userFavoritesRef, { attractions: [attraction] });
+    } else {
+      const attractions = userFavoritesSnap.data().attractions || [];
+      const existingAttractionIndex = attractions.findIndex(
+        (item: IAttraction) => item.id === attraction.id,
+      );
+      if (existingAttractionIndex > -1) {
+        // If the attraction already exists, do nothing or handle accordingly
+      } else {
+        await updateDoc(userFavoritesRef, {
+          attractions: arrayUnion(attraction),
+        });
+      }
+    }
+  } catch (error) {
+    console.error('Error adding attraction to favorites:', error);
+    throw error;
+  }
+};
+
+export const getFavorites = async (userId: string) => {
+  try {
+    const userFavoritesRef = doc(db, 'favorites', userId);
+    const userFavoritesSnap = await getDoc(userFavoritesRef);
+
+    if (userFavoritesSnap.exists()) {
+      return userFavoritesSnap.data().attractions || [];
+    } else {
+      console.log('No such document!');
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching favorites:', error);
+    return [];
+  }
 };
 
 export { fetchMarkers, buildRoute, fetchPlaceDetails };

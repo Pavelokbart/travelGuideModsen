@@ -22,10 +22,11 @@ build/
 # Webpack output
 .bundle/
 .bundle.js
-.bundle.js.map
+.bundle.js.mapе 
 
 # eslint cache
 .eslintcache
+
 
 # Prettier cache
 .prettiercache

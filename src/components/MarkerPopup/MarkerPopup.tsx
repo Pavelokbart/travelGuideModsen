@@ -4,6 +4,10 @@ import { LatLngExpression } from 'leaflet';
 import './MarkerPopup.css';
 import { MarkerPopupProps } from '../../types';
 import DetailedInfo from '../DetailedInfo/DetailedInfo';
+import { db } from '../../firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import { addAttractionToFavorites } from '../../utils/apiUtils';
+import { auth } from '../../firebase';
 
 const MarkerPopup: React.FC<MarkerPopupProps> = ({
   name,
@@ -37,6 +41,20 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({
     setRouteDetails(null);
   };
 
+  const handleAddToFavorites = async () => {
+    const userId = auth.currentUser?.uid;
+    if (userId) {
+      const attraction = {
+        id: xid,
+        name,
+      };
+      await addAttractionToFavorites(userId, attraction);
+      alert('Attraction added to favorites!');
+    } else {
+      alert('You need to log in to add favorites');
+    }
+  };
+
   return (
     <Popup>
       <div className="popup-content">
@@ -48,8 +66,8 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({
         <button onClick={handleShowDetails} className="popup-button">
           Show Details
         </button>
-        <button onClick={handleShowDetails} className="popup-button">
-          Add to favorite
+        <button onClick={handleAddToFavorites} className="popup-button">
+          Add to Favorite
         </button>
         <button onClick={handleClearRoute} className="popup-button">
           Clear Route
