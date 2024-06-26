@@ -47,6 +47,7 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({
       const attraction = {
         id: xid,
         name,
+        position,
       };
       await addAttractionToFavorites(userId, attraction);
       alert('Attraction added to favorites!');

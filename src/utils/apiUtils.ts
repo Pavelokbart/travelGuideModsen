@@ -150,21 +150,22 @@ export const addAttractionToFavorites = async (
   attraction: IAttraction,
 ) => {
   try {
+    const { id, name, position } = attraction; // Деструктурируем attraction, чтобы получить необходимые поля
     const userFavoritesRef = getUserFavoritesRef(userId);
     const userFavoritesSnap = await getDoc(userFavoritesRef);
 
     if (!userFavoritesSnap.exists()) {
-      await setDoc(userFavoritesRef, { attractions: [attraction] });
+      await setDoc(userFavoritesRef, { attractions: [{ id, name, position }] }); // Сохраняем все поля аттракции, включая position
     } else {
       const attractions = userFavoritesSnap.data().attractions || [];
       const existingAttractionIndex = attractions.findIndex(
         (item: IAttraction) => item.id === attraction.id,
       );
       if (existingAttractionIndex > -1) {
-        // If the attraction already exists, do nothing or handle accordingly
+        // Если аттракция уже существует, ничего не делаем или обрабатываем соответствующим образом
       } else {
         await updateDoc(userFavoritesRef, {
-          attractions: arrayUnion(attraction),
+          attractions: arrayUnion({ id, name, position }), // Добавляем аттракцию в массив, если она еще не существует
         });
       }
     }
@@ -173,7 +174,6 @@ export const addAttractionToFavorites = async (
     throw error;
   }
 };
-
 export const getFavorites = async (userId: string) => {
   try {
     const userFavoritesRef = doc(db, 'favorites', userId);

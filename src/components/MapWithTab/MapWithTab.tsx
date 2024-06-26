@@ -6,7 +6,7 @@ import { MarkerData } from '../../types';
 
 const MapWithTab: React.FC = () => {
   const [category, setCategory] = useState<string>('all');
-  const [radius, setRadius] = useState<number>(5000);
+  const [radius, setRadius] = useState<number>(2000);
   const [searchResult, setSearchResult] = useState<MarkerData | null>(null);
 
   const handleSearch = async (query: string) => {

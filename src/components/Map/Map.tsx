@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Polyline,
+  Circle,
+} from 'react-leaflet';
 import L, { LatLngExpression } from 'leaflet';
 import { MarkerData, UserLocation, MapProps } from '../../types';
 import MarkerPopup from '../MarkerPopup/MarkerPopup';
@@ -104,6 +110,13 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
+      {userLocation && radius && (
+        <Circle
+          center={[userLocation.lat, userLocation.lng]}
+          radius={radius}
+          color="blue"
+        />
+      )}
       {markers.map((marker) => (
         <Marker
           key={marker.id}

@@ -72,4 +72,5 @@ export interface DetailedPlaceInfoProps {
 export interface IAttraction {
   id: string;
   name: string;
+  position: LatLngExpression;
 }
