@@ -31,6 +31,7 @@ function SignUp() {
       <div className="main">
         <div className="container">
           <div className="main_txtregis">Sign Up</div>
+          <Link to="/map">Go to Map</Link>
           <div className="main_blockregistr">
             <form className="form_input" onSubmit={register}>
               <h2>Create an account</h2>

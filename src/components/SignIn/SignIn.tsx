@@ -3,6 +3,7 @@ import React, { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase';
 import './SignIn.css';
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -15,8 +16,6 @@ function SignIn() {
         console.log(user);
         setError('');
         setEmail('');
-        setPassword('');
-        window.location.href = `/map`;
       })
       .catch((error) => {
         console.log(error);
@@ -29,6 +28,7 @@ function SignIn() {
         <div className="container">
           <div className="signform">
             <div className="signform_signin">Sign In</div>
+            <Link to="/map">Go to Map</Link>
 
             <div>
               <form className="signform_form" onSubmit={logIn}>

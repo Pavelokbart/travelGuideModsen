@@ -12,7 +12,7 @@ const MapWithTab: React.FC = () => {
   const handleSearch = async (query: string) => {
     const apiKey = '5ae2e3f221c38a28845f05b692c2b88ed6e6285f06ed260b57075108';
     const response = await fetch(
-      `https://api.opentripmap.com/0.1/en/places/geoname?name=${query}&apikey=${apiKey}`,
+      `https://api.opentripmap.com/0.1/ru/places/geoname?name=${query}&apikey=${apiKey}`,
     );
 
     const data = await response.json();

@@ -68,7 +68,7 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({
         return categoryPriority[i];
       }
     }
-    return 'other'; // default category if none match
+    return 'other';
   };
 
   const getIconForCategory = (categoryString: string) => {
@@ -127,7 +127,7 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({
             name={marker.name}
             position={marker.position}
             xid={marker.id}
-            clearRoute={clearRoute} // Передача xid
+            clearRoute={clearRoute}
             buildRoute={(destination, callback) =>
               buildRoute(
                 userLocation,

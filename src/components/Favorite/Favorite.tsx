@@ -27,7 +27,6 @@ const Favorite = () => {
     fetchFavorites();
   }, []);
 
-  // Fetch user location
   useEffect(() => {
     const locateUser = async () => {
       if (navigator.geolocation) {
