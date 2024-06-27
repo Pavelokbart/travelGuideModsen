@@ -3,7 +3,6 @@ import React, { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase';
 import './SignIn.css';
-import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
   const [email, setEmail] = useState('');

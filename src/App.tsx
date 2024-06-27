@@ -6,9 +6,10 @@ import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import AuthDetails from './components/AuthDetails/AuthDetails';
 import { auth } from './firebase';
+import { User } from 'firebase/auth';
 
 function App() {
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {

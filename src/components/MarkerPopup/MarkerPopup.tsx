@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { Popup } from 'react-leaflet';
-import { LatLngExpression } from 'leaflet';
 import './MarkerPopup.css';
 import { MarkerPopupProps } from '../../types';
 import DetailedInfo from '../DetailedInfo/DetailedInfo';
-import { db } from '../../firebase';
-import { collection, addDoc } from 'firebase/firestore';
 import { addAttractionToFavorites } from '../../utils/apiUtils';
 import { auth } from '../../firebase';
 

@@ -1,6 +1,6 @@
 import { LatLngExpression } from 'leaflet';
 import polyline from '@mapbox/polyline';
-import { Console } from 'console';
+
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from '../firebase';
 import {

@@ -14,7 +14,6 @@ const Favorite = () => {
     duration: number;
   } | null>(null);
 
-  // Fetch user favorites
   useEffect(() => {
     const fetchFavorites = async () => {
       const userId = auth.currentUser?.uid;
