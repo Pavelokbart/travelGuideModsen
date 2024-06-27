@@ -102,7 +102,7 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({
       center={
         userLocation ? [userLocation.lat, userLocation.lng] : [51.505, -0.09]
       }
-      zoom={13}
+      zoom={40}
       style={{ height: '100%', width: '100%' }}
     >
       <LocateUser setUserLocation={setUserLocation} />

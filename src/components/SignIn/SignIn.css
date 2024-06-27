@@ -10,6 +10,7 @@
   font-family: 'Bebas Neue', sans-serif;
   display: flex;
   justify-content: center;
+  font-family: Mont;
 }
 *,
 *::after,
@@ -25,36 +26,35 @@
 }
 .signform {
   margin-top: 72px;
+  font-family: Mont;
 }
 .back_link {
   text-decoration: none;
   color: #313037;
-  font-family: Inter;
+  font-family: Mont;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   text-align: left;
-
-  font-family: 'Bebas Neue', sans-serif;
 }
 .signform_signin {
   margin-top: 32px;
-  font-family: Inter;
+  font-family: Mont;
   font-size: 56px;
   font-weight: 700;
   line-height: 80px;
   text-align: left;
-
-  font-family: 'Bebas Neue', sans-serif;
 }
 .forregist {
   width: 544px;
   height: 56px;
+  padding-left: 20px;
+  font-family: Mont;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 25.56px;
 
   background-color: #ffffff;
-}
-.forregist::placeholder {
-  padding-left: 20px;
 }
 
 .signform_form {
@@ -69,14 +69,13 @@
   display: flex;
   flex-direction: column;
 
-  font-family: 'Bebas Neue', sans-serif;
+  justify-content: center;
+  align-items: center;
 }
 .form_input {
   display: flex;
   flex-direction: column;
   gap: 40px;
-
-  font-family: 'Bebas Neue', sans-serif;
 }
 .form_forgot {
   margin-top: 16px;
@@ -85,15 +84,15 @@
   font-weight: 400;
   line-height: 20px;
   text-align: left;
-
-  font-family: 'Bebas Neue', sans-serif;
 }
 .form_button {
   margin-top: 45px;
   height: 56px;
+  width: 400px;
+
   background: #313037;
 
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: Mont;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
@@ -118,4 +117,32 @@
   color: #313037;
 
   text-decoration: none;
+}
+
+@media (max-width: 375px) {
+  .signform_form {
+    padding: 10px;
+  }
+  .signform {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .forregist {
+    width: 320px;
+  }
+  .signform_form {
+    width: 360px;
+  }
+
+  .form_button {
+    width: 330px;
+  }
+
+  .signform_signin {
+    font-size: 36px;
+    line-height: 60px;
+  }
 }

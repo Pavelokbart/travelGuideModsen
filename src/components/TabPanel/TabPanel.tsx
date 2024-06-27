@@ -1,24 +1,42 @@
 import React, { useState } from 'react';
 import './TabPanel.css';
 import { Link } from 'react-router-dom';
-import { LogoIcon } from '../../Icons/LogoIcon';
-import { SearchIcon } from '../../Icons/SearchIcon';
-import { FavoriteIcon } from '../../Icons/FavoriteIcon';
-import { SearchBtnIcon } from '../../Icons/SearchBtnIcon';
-import { GardenIcon } from '../../Icons/GardenIcon';
-import { ReligionIconForSearch } from '../../Icons/ReligionIconForSearch';
-import { MuseumIconForSearch } from '../../Icons/MuseumIconForSearch';
+import { LogoIcon } from '@Icons/LogoIcon';
+import { SearchIcon } from '@Icons/SearchIcon';
+import { FavoriteIcon } from '@Icons/FavoriteIcon';
+import { SearchBtnIcon } from '@Icons/SearchBtnIcon';
+import { GardenIcon } from '@Icons/GardenIcon';
+import { ReligionIconForSearch } from '@Icons/ReligionIconForSearch';
+import { MuseumIconForSearch } from '@Icons/MuseumIconForSearch';
 import Favorite from '../Favorite/Favorite';
-import { HistoricIconForSearch } from '../../Icons/HistoricIconForSearch';
-import { IndustrialIconForSearch } from '../../Icons/IndustrialIconForSearch';
-import { ArchitectureIconForSearch } from '../../Icons/ArchitectureIconForSearch';
-import { OtherIconForSearch } from '../../Icons/otherIconForSearch';
+import { HistoricIconForSearch } from '@Icons/HistoricIconForSearch';
+import { IndustrialIconForSearch } from '@Icons/IndustrialIconForSearch';
+import { ArchitectureIconForSearch } from '@Icons/ArchitectureIconForSearch';
+import { OtherIconForSearch } from '@Icons/otherIconForSearch';
 
 interface TabPanelProps {
   setCategory: (category: string) => void;
   setRadius: (radius: number) => void;
   onSearch: (query: string) => void;
 }
+
+const categories = [
+  { id: 'cultural', label: 'Cultural', Icon: MuseumIconForSearch },
+  { id: 'natural', label: 'Natural', Icon: GardenIcon },
+  { id: 'religion', label: 'Religion', Icon: ReligionIconForSearch },
+  { id: 'historic', label: 'Historic', Icon: HistoricIconForSearch },
+  {
+    id: 'industrial_facilities',
+    label: 'Industrial',
+    Icon: IndustrialIconForSearch,
+  },
+  {
+    id: 'architecture',
+    label: 'Architecture',
+    Icon: ArchitectureIconForSearch,
+  },
+  { id: 'other', label: 'Other', Icon: OtherIconForSearch },
+];
 
 const TabPanel: React.FC<TabPanelProps> = ({
   setCategory,
@@ -94,40 +112,16 @@ const TabPanel: React.FC<TabPanelProps> = ({
                 />
                 <p>Искать:</p>
                 <div className="category-list">
-                  <button type="button" onClick={() => setCategory('cultural')}>
-                    <MuseumIconForSearch />
-                    <span>Cultural</span>
-                  </button>
-                  <button type="button" onClick={() => setCategory('natural')}>
-                    <GardenIcon />
-                    <span>Natural</span>
-                  </button>
-                  <button type="button" onClick={() => setCategory('religion')}>
-                    <ReligionIconForSearch />
-                    <span>Religion</span>
-                  </button>
-                  <button type="button" onClick={() => setCategory('historic')}>
-                    <HistoricIconForSearch />
-                    <span>Historic</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setCategory('industrial_facilities')}
-                  >
-                    <IndustrialIconForSearch />
-                    <span>Industrial</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setCategory('architecture')}
-                  >
-                    <ArchitectureIconForSearch />
-                    <span>Architecture</span>
-                  </button>
-                  <button type="button" onClick={() => setCategory('other')}>
-                    <OtherIconForSearch />
-                    <span>Other</span>
-                  </button>
+                  {categories.map((category) => (
+                    <button
+                      key={category.id}
+                      type="button"
+                      onClick={() => setCategory(category.id)}
+                    >
+                      <category.Icon />
+                      <span>{category.label}</span>
+                    </button>
+                  ))}
                 </div>
                 <div className="radius-input">
                   <div className="radius_txt">В Радиусе (км)</div>

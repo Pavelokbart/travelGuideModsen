@@ -27,7 +27,7 @@ const fetchMarkers = async (
     kinds = 'industrial_facilities';
   else if (category === 'other') kinds = 'other';
 
-  const apiKey = '5ae2e3f221c38a28845f05b692c2b88ed6e6285f06ed260b57075108';
+  const apiKey = process.env.REACT_APP_OPENTRIPMAP_API_KEY;
   const response = await fetch(
     `https://api.opentripmap.com/0.1/en/places/radius?radius=${radius}&lon=${lng}&lat=${lat}&kinds=${kinds}&apikey=${apiKey}`,
   );
@@ -82,7 +82,7 @@ const buildRoute = (
   request.setRequestHeader('Content-Type', 'application/json');
   request.setRequestHeader(
     'Authorization',
-    '5b3ce3597851110001cf62483c2c66866a324194a4152e0c1697bc49',
+    process.env.REACT_APP_OPENROUTESERVICE_API_KEY as string,
   );
 
   request.onreadystatechange = function () {

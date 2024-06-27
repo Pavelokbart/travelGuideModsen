@@ -30,8 +30,8 @@ function SignIn() {
           <div className="signform">
             <div className="signform_signin">Sign In</div>
 
-            <div className="signform_form">
-              <form onSubmit={logIn}>
+            <div>
+              <form className="signform_form" onSubmit={logIn}>
                 <div className="form_input">
                   <input
                     className="forregist"
@@ -49,18 +49,17 @@ function SignIn() {
                   />
                 </div>
 
-                <div className="form_forgot">Forgot password?</div>
                 <button type="submit" className="form_button">
                   Login
                 </button>
+                <div className="form_accout">
+                  Don’t have an account?
+                  <Link className="accout_link" to="/sign-up">
+                    Sign Up
+                  </Link>
+                </div>
               </form>
               {error ? <p style={{ color: 'red' }}>{error}</p> : ''}
-              <div className="form_accout">
-                Don’t have an account?
-                <Link className="accout_link" to="/sign-up">
-                  Sign Up
-                </Link>
-              </div>
             </div>
           </div>
         </div>

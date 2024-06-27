@@ -51,6 +51,7 @@
     "@eslint/js": "^9.5.0",
     "@types/mapbox__polyline": "^1.0.5",
     "clean-webpack-plugin": "^4.0.0",
+    "dotenv-webpack": "^8.1.0",
     "eslint": "^9.5.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",

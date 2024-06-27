@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -25,7 +26,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@Icons': path.resolve(__dirname, 'src/Icons'),
+    },
   },
   output: {
     filename: 'bundle.js',
@@ -42,6 +46,7 @@ module.exports = {
         PUBLIC_URL: '' // Пустая строка заменит %PUBLIC_URL% в HTML-шаблоне
       }
     }),
+    new Dotenv()
 
   ]
 };

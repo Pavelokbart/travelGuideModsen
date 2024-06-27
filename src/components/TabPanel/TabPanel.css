@@ -2,12 +2,12 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  min-height: 400px; /* Минимальная высота для содержания */
+  min-height: 400px;
 }
 
 .serach_button {
   width: 100%;
-  margin-top: 20px; /* Установить отступ сверху */
+  margin-top: 20px;
   max-width: 350px;
   height: 60px;
   border-radius: 10px;
@@ -121,6 +121,11 @@
   padding: 10px;
   border-radius: 4px;
   transition: background-color 0.3s;
+  font-family: 'Mont';
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17.89px;
+  text-align: left;
 }
 
 .category-list button:hover {

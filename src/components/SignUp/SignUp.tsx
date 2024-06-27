@@ -22,6 +22,7 @@ function SignUp() {
         setEmail('');
         setCopyPassword('');
         setPassword('');
+        window.location.href = `/map`;
       })
       .catch((error) => console.log(error));
   }

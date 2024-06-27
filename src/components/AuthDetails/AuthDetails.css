@@ -9,7 +9,7 @@
 
 .account_title {
   margin-top: 50px;
-  font-family: 'Bebas Neue';
+  font-family: Mont;
   font-size: 56px;
   font-weight: 700;
   line-height: 64px;
@@ -18,7 +18,7 @@
 
 .account_profile {
   margin-top: 48px;
-  font-family: 'Bebas Neue';
+  font-family: Mont;
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
@@ -33,7 +33,7 @@
 
 .info_name,
 .info_email {
-  font-family: 'Helios';
+  font-family: Mont;
   font-size: 16px;
   font-weight: 700;
   line-height: 32px;
@@ -94,6 +94,7 @@
   height: 50px;
   margin-top: 20px;
   cursor: pointer;
+  font-family: Mont;
 }
 
 .login_button:hover {
