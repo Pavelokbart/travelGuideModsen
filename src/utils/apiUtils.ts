@@ -1,7 +1,14 @@
 import { LatLngExpression } from 'leaflet';
 import polyline from '@mapbox/polyline';
 
-import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 import {
   ApiResponse,
@@ -188,6 +195,34 @@ export const getFavorites = async (userId: string) => {
   } catch (error) {
     console.error('Error fetching favorites:', error);
     return [];
+  }
+};
+export const removeAttractionFromFavorites = async (
+  userId: string,
+  attraction: IAttraction,
+) => {
+  try {
+    const { id, name, position } = attraction;
+    const userFavoritesRef = getUserFavoritesRef(userId);
+    const userFavoritesSnap = await getDoc(userFavoritesRef);
+
+    if (userFavoritesSnap.exists()) {
+      const attractions: IAttraction[] =
+        userFavoritesSnap.data().attractions || [];
+      const existingAttractionIndex = attractions.findIndex(
+        (item: IAttraction) => item.id === id,
+      );
+      if (existingAttractionIndex > -1) {
+        await updateDoc(userFavoritesRef, {
+          attractions: arrayRemove({ id, name, position }),
+        });
+      }
+    } else {
+      console.log('No such document!');
+    }
+  } catch (error) {
+    console.error('Error removing attraction from favorites:', error);
+    throw error;
   }
 };
 

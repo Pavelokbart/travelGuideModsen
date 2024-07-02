@@ -13,6 +13,8 @@ import { HistoricIconForSearch } from '@Icons/HistoricIconForSearch';
 import { IndustrialIconForSearch } from '@Icons/IndustrialIconForSearch';
 import { ArchitectureIconForSearch } from '@Icons/ArchitectureIconForSearch';
 import { OtherIconForSearch } from '@Icons/otherIconForSearch';
+import { UserIcon } from '@Icons/UserIcon';
+import { SearchIconInput } from '@Icons/SearchIconInput';
 
 interface TabPanelProps {
   setCategory: (category: string) => void;
@@ -44,7 +46,7 @@ const TabPanel: React.FC<TabPanelProps> = ({
   onSearch,
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [radiusInKm, setRadiusInKm] = useState<string>('10');
+  const [radiusInKm, setRadiusInKm] = useState<string>('2');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isFavoriteSidebar, setIsFavoriteSidebar] = useState(false);
 
@@ -89,8 +91,10 @@ const TabPanel: React.FC<TabPanelProps> = ({
           <FavoriteIcon />
         </button>
       </div>
-      <Link to="/auth">User</Link>
-
+      <div className="tabpanel_spacer" />
+      <Link to="/auth" className="tabpanel_user">
+        <UserIcon />
+      </Link>
       {isSidebarOpen && (
         <div className="sidebar">
           <button
@@ -103,14 +107,19 @@ const TabPanel: React.FC<TabPanelProps> = ({
           <div className="sidebar-content">
             {!isFavoriteSidebar ? (
               <>
-                <input
-                  className="search_input"
-                  type="text"
-                  placeholder="Место, адрес.."
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                />
-                <p>Искать:</p>
+                <div className="input-container">
+                  <div className="input-icon">
+                    <SearchIconInput />
+                  </div>
+                  <input
+                    className="search_input"
+                    type="text"
+                    placeholder="Место, адрес.."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                  />
+                </div>
+                <div className="sidebar_find">Искать</div>
                 <div className="category-list">
                   {categories.map((category) => (
                     <button

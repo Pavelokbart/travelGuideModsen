@@ -98,6 +98,17 @@
   line-height: 24px;
   color: #ffffff;
   border: none;
+  cursor: pointer;
+}
+
+.form_button:hover {
+  background-color: #4b4a4d;
+}
+
+.form_button:active {
+  background-color: #313037;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 .form_accout {
   margin-top: 48px;

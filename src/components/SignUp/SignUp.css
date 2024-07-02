@@ -60,7 +60,18 @@
   font-weight: 600;
   line-height: 24px;
   color: #ffffff;
+  cursor: pointer;
 }
+.main_button:hover {
+  background-color: #4b4a4d;
+}
+
+.main_button:active {
+  background-color: #313037;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 .main_txt {
   font-family: Mont;
   font-size: 16px;

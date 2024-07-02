@@ -4,6 +4,7 @@ import { IAttraction, UserLocation } from '../../types';
 import { auth } from '../../firebase';
 import { getFavorites, buildRoute } from '../../utils/apiUtils';
 import { LatLngExpression } from 'leaflet';
+import { removeAttractionFromFavorites } from '../../utils/apiUtils';
 
 const Favorite = () => {
   const [favorites, setFavorites] = useState<IAttraction[]>([]);
@@ -62,6 +63,19 @@ const Favorite = () => {
       );
     }
   };
+  const handleRemoveFavorite = async (attraction: IAttraction) => {
+    const userId = auth.currentUser?.uid;
+    if (userId) {
+      try {
+        await removeAttractionFromFavorites(userId, attraction);
+        setFavorites((prevFavorites) =>
+          prevFavorites.filter((fav) => fav.id !== attraction.id),
+        );
+      } catch (error) {
+        console.error('Error removing favorite:', error);
+      }
+    }
+  };
 
   return (
     <div className="favorite-container">
@@ -69,7 +83,12 @@ const Favorite = () => {
         <div key={attraction.id} className="favoriteblock">
           <div className="favoriteblock_name">{attraction.name}</div>
           <div className="favoriteblock_buttons">
-            <button className="delete_button">Icon</button>
+            <button
+              className="delete_button"
+              onClick={() => handleRemoveFavorite(attraction)}
+            >
+              Delete
+            </button>
             <button
               className="build_button"
               onClick={() => handleBuildRoute(attraction)}

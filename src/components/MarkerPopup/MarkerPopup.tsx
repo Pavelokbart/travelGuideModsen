@@ -5,6 +5,7 @@ import { MarkerPopupProps } from '../../types';
 import DetailedInfo from '../DetailedInfo/DetailedInfo';
 import { addAttractionToFavorites } from '../../utils/apiUtils';
 import { auth } from '../../firebase';
+import Modal from '../Modal/Modal';
 
 const MarkerPopup: React.FC<MarkerPopupProps> = ({
   name,
@@ -18,6 +19,7 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({
     duration: number;
   } | null>(null);
   const [showDetails, setShowDetails] = useState(false);
+  const [modalMessage, setModalMessage] = useState<string | null>(null);
 
   const handleBuildRoute = () => {
     buildRoute(position, (distance, duration) => {
@@ -47,10 +49,13 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({
         position,
       };
       await addAttractionToFavorites(userId, attraction);
-      alert('Attraction added to favorites!');
+      setModalMessage('Attraction added to favorites!');
     } else {
-      alert('You need to log in to add favorites');
+      setModalMessage('You need to log in to add favorites');
     }
+  };
+  const handleCloseModal = () => {
+    setModalMessage(null);
   };
 
   return (
@@ -80,6 +85,13 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({
           </div>
         )}
         {showDetails && <DetailedInfo xid={xid} onClose={handleCloseDetails} />}
+        {modalMessage && (
+          <Modal
+            isOpen={true}
+            onClose={handleCloseModal}
+            message={modalMessage}
+          />
+        )}
       </div>
     </Popup>
   );
