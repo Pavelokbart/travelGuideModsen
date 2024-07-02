@@ -2,31 +2,44 @@ import React, { useState } from 'react';
 import './MapWithTab.css';
 import TabPanel from '../TabPanel/TabPanel';
 import Map from '../Map/Map';
-import { MarkerData } from '../../types';
+import { MarkerData, UserLocation } from '../../types';
 
 const MapWithTab: React.FC = () => {
   const [category, setCategory] = useState<string>('all');
-  const [radius, setRadius] = useState<number>(2000);
+  const [radius, setRadius] = useState<number>(5000);
   const [searchResult, setSearchResult] = useState<MarkerData | null>(null);
+  const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
 
   const handleSearch = async (query: string) => {
+    if (!userLocation) {
+      console.error('User location is not set');
+      return;
+    }
+
+    const { lat, lng } = userLocation;
     const apiKey = '5ae2e3f221c38a28845f05b692c2b88ed6e6285f06ed260b57075108';
     const response = await fetch(
-      `https://api.opentripmap.com/0.1/ru/places/geoname?name=${query}&apikey=${apiKey}`,
+      `https://api.opentripmap.com/0.1/ru/places/autosuggest?name=${query}&radius=${radius}&lon=${lng}&lat=${lat}&apikey=${apiKey}`,
     );
 
     const data = await response.json();
     console.log('find');
 
     console.log(data);
-    if (data) {
+    if (data && data.features && data.features.length > 0) {
+      const feature = data.features[0];
       const searchMarker: MarkerData = {
-        id: data.xid,
-        name: data.name,
-        position: [data.lat, data.lon],
-        category: data.kinds,
+        id: feature.properties.xid,
+        name: feature.properties.name,
+        position: [
+          feature.geometry.coordinates[1],
+          feature.geometry.coordinates[0],
+        ],
+        category: feature.properties.kinds,
       };
       setSearchResult(searchMarker);
+    } else {
+      setSearchResult(null);
     }
   };
 
@@ -37,7 +50,13 @@ const MapWithTab: React.FC = () => {
         setRadius={setRadius}
         onSearch={handleSearch}
       />
-      <Map category={category} radius={radius} searchResult={searchResult} />
+      <Map
+        category={category}
+        radius={radius}
+        searchResult={searchResult}
+        userLocation={userLocation}
+        setUserLocation={setUserLocation}
+      />
     </div>
   );
 };

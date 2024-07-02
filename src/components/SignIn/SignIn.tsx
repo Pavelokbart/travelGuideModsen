@@ -15,6 +15,7 @@ function SignIn() {
         console.log(user);
         setError('');
         setEmail('');
+        window.location.href = `/map`;
       })
       .catch((error) => {
         console.log(error);

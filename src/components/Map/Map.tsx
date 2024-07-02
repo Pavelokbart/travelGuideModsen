@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   MapContainer,
   TileLayer,
@@ -23,18 +23,21 @@ import otherIconSvg from '../../Icons/otherIcon';
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({
-  category,
-  radius,
-  searchResult,
-}) => {
+const Map: React.FC<
+  MapProps & {
+    searchResult: MarkerData | null;
+    userLocation: UserLocation | null;
+    setUserLocation: (loc: UserLocation) => void;
+  }
+> = ({ category, radius, searchResult, userLocation, setUserLocation }) => {
   const [markers, setMarkers] = useState<MarkerData[]>([]);
-  const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
   const [route, setRoute] = useState<LatLngExpression[]>([]);
   const [routeInfo, setRouteInfo] = useState<{
     distance: number;
     duration: number;
   } | null>(null);
+
+  const searchMarkerRef = useRef<L.Marker | null>(null);
 
   useEffect(() => {
     if (userLocation) {
@@ -44,18 +47,23 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({
     }
   }, [category, userLocation, radius]);
 
+  useEffect(() => {
+    if (searchResult && searchMarkerRef.current) {
+      searchMarkerRef.current.openPopup();
+    }
+  }, [searchResult]);
+
   const categoryPriority = [
     'cultural',
     'natural',
     'religion',
     'historic',
     'architecture',
-
     'industrial_facilities',
     'natural',
-
     'other',
   ];
+
   const clearRoute = () => {
     setRoute([]);
     setRouteInfo(null);
@@ -83,7 +91,6 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({
     if (highestPriorityCategory === 'architecture') {
       return CustomIcon(architectureIconSvg);
     }
-
     if (highestPriorityCategory === 'cultural') {
       return CustomIcon(museumIconSvg);
     }
@@ -91,7 +98,6 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({
     if (highestPriorityCategory === 'religion') {
       return CustomIcon(religionIconSvg);
     }
-
     if (highestPriorityCategory === 'other') return CustomIcon(otherIconSvg);
 
     return DefaultIcon;
@@ -142,11 +148,27 @@ const Map: React.FC<MapProps & { searchResult: MarkerData | null }> = ({
       ))}
       {route.length > 0 && <Polyline positions={route} color="blue" />}
       {searchResult && (
-        <Marker position={searchResult.position}>
+        <Marker
+          position={searchResult.position}
+          ref={(ref) => {
+            searchMarkerRef.current = ref;
+            if (ref) {
+              ref.openPopup();
+            }
+          }}
+        >
           <MarkerPopup
             name={searchResult.name}
             position={searchResult.position}
-            buildRoute={() => {}}
+            buildRoute={(destination, callback) =>
+              buildRoute(
+                userLocation,
+                destination,
+                callback,
+                setRoute,
+                setRouteInfo,
+              )
+            }
             xid={searchResult.id}
             clearRoute={clearRoute}
           />
