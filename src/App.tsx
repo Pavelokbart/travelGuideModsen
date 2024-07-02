@@ -1,6 +1,9 @@
+// src/App.tsx
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import MapWithTab from './components/MapWithTab/MapWithTab';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
@@ -20,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route
@@ -33,7 +36,7 @@ function App() {
           <Route path="/map" element={<MapWithTab />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </Provider>
   );
 }
 

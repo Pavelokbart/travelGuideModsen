@@ -3,10 +3,12 @@ import './MapWithTab.css';
 import TabPanel from '../TabPanel/TabPanel';
 import Map from '../Map/Map';
 import { MarkerData, UserLocation } from '../../types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 const MapWithTab: React.FC = () => {
   const [category, setCategory] = useState<string>('all');
-  const [radius, setRadius] = useState<number>(2000);
+  const radius = useSelector((state: RootState) => state.radius.radius);
   const [searchResult, setSearchResult] = useState<MarkerData | null>(null);
   const [userLocation, setUserLocation] = useState<UserLocation | null>(null);
 
@@ -45,11 +47,7 @@ const MapWithTab: React.FC = () => {
 
   return (
     <div className="map">
-      <TabPanel
-        setCategory={setCategory}
-        setRadius={setRadius}
-        onSearch={handleSearch}
-      />
+      <TabPanel setCategory={setCategory} onSearch={handleSearch} />
       <Map
         category={category}
         radius={radius}

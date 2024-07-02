@@ -1,4 +1,8 @@
+// src/components/TabPanel/TabPanel.tsx
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { setRadius } from '../../redux/radiusSlice';
 import './TabPanel.css';
 import { Link } from 'react-router-dom';
 import { LogoIcon } from '@Icons/LogoIcon';
@@ -18,7 +22,6 @@ import { SearchIconInput } from '@Icons/SearchIconInput';
 
 interface TabPanelProps {
   setCategory: (category: string) => void;
-  setRadius: (radius: number) => void;
   onSearch: (query: string) => void;
 }
 
@@ -40,15 +43,15 @@ const categories = [
   { id: 'other', label: 'Other', Icon: OtherIconForSearch },
 ];
 
-const TabPanel: React.FC<TabPanelProps> = ({
-  setCategory,
-  setRadius,
-  onSearch,
-}) => {
+const TabPanel: React.FC<TabPanelProps> = ({ setCategory, onSearch }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [radiusInKm, setRadiusInKm] = useState<string>('2');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isFavoriteSidebar, setIsFavoriteSidebar] = useState(false);
+
+  const dispatch = useDispatch();
+  const radiusInKm = useSelector(
+    (state: RootState) => state.radius.radius / 1000,
+  );
 
   const toggleSidebar = (isFavorite: boolean) => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -57,9 +60,7 @@ const TabPanel: React.FC<TabPanelProps> = ({
 
   const handleRadiusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valueInKm = e.target.value;
-    setRadiusInKm(valueInKm);
-    const valueInMeters = parseInt(valueInKm, 10) * 1000;
-    setRadius(valueInMeters);
+    dispatch(setRadius(parseInt(valueInKm, 10) * 1000));
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,7 +138,7 @@ const TabPanel: React.FC<TabPanelProps> = ({
                   <input
                     className="inputforkm"
                     type="text"
-                    value={radiusInKm}
+                    value={radiusInKm.toString()}
                     onChange={handleRadiusChange}
                   />
                 </div>
