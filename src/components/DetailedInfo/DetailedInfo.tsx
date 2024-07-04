@@ -12,7 +12,6 @@ const DetailedInfo: React.FC<DetailedPlaceInfoProps> = ({ xid, onClose }) => {
   }, [xid]);
 
   if (!placeInfo) return <div>Loading...</div>;
-  console.log(placeInfo);
 
   return (
     <div className="detailed-info">

@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh; /* Устанавливаем высоту на всю высоту экрана */
+  height: 100vh;
 }
 
 .tabpanel_logo {
@@ -31,7 +31,7 @@
 }
 
 .tabpanel_user {
-  margin-bottom: 20px; /* Отступ снизу */
+  margin-bottom: 20px;
 }
 
 .sidebar {
@@ -71,6 +71,7 @@
   display: flex;
   flex-direction: column;
   min-height: 400px;
+  overflow-y: auto;
 }
 
 .serach_button {
@@ -175,10 +176,23 @@
   padding: 0 10px;
   font-size: 16px;
 }
+.favorite {
+  font-family: Mont;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 25.56px;
+  text-align: left;
+}
 
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;
     max-width: 200px;
+  }
+  .tabpanel {
+    max-width: 70px;
+  }
+  .sidebar {
+    left: 69px;
   }
 }

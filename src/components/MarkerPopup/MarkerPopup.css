@@ -32,3 +32,11 @@
   display: flex;
   gap: 20px;
 }
+@media (max-width: 375px) {
+  .popup {
+    width: 280px;
+  }
+  .popup-button {
+    font-size: 8px;
+  }
+}

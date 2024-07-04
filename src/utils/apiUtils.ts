@@ -226,4 +226,38 @@ export const removeAttractionFromFavorites = async (
   }
 };
 
+export const handleSearch = async (
+  query: string,
+  lat: number,
+  lng: number,
+  radius: number,
+  apiKey: string,
+): Promise<MarkerData | null> => {
+  try {
+    const response = await fetch(
+      `https://api.opentripmap.com/0.1/ru/places/autosuggest?name=${query}&radius=${radius}&lon=${lng}&lat=${lat}&apikey=${apiKey}`,
+    );
+    const data = await response.json();
+
+    if (data && data.features && data.features.length > 0) {
+      const feature = data.features[0];
+      const searchMarker: MarkerData = {
+        id: feature.properties.xid,
+        name: feature.properties.name,
+        position: [
+          feature.geometry.coordinates[1],
+          feature.geometry.coordinates[0],
+        ],
+        category: feature.properties.kinds,
+      };
+      return searchMarker;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Search error:', error);
+    return null;
+  }
+};
+
 export { fetchMarkers, buildRoute, fetchPlaceDetails };

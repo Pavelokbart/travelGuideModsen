@@ -64,23 +64,6 @@ function SignIn() {
           </div>
         </div>
       </div>
-      {/* <form>
-        <h2>Log in</h2>
-        <input
-          placeholder="Please enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-        />
-        <input
-          placeholder="Please enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-        />
-        <button onClick={logIn}>Login</button>
-        {error ? <p style={{ color: "red" }}>{error}</p> : ""}
-      </form> */}
     </div>
   );
 }

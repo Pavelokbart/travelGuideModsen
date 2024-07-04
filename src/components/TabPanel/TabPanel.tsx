@@ -60,7 +60,15 @@ const TabPanel: React.FC<TabPanelProps> = ({ setCategory, onSearch }) => {
 
   const handleRadiusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valueInKm = e.target.value;
-    dispatch(setRadius(parseInt(valueInKm, 10) * 1000));
+
+    if (valueInKm === '') {
+      dispatch(setRadius(0));
+    } else {
+      const numericValue = parseInt(valueInKm, 10);
+      if (!isNaN(numericValue)) {
+        dispatch(setRadius(numericValue * 1000));
+      }
+    }
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,12 +123,12 @@ const TabPanel: React.FC<TabPanelProps> = ({ setCategory, onSearch }) => {
                   <input
                     className="search_input"
                     type="text"
-                    placeholder="Место, адрес.."
+                    placeholder="Place"
                     value={searchQuery}
                     onChange={handleSearchChange}
                   />
                 </div>
-                <div className="sidebar_find">Искать</div>
+                <div className="sidebar_find">Find</div>
                 <div className="category-list">
                   {categories.map((category) => (
                     <button
@@ -134,11 +142,11 @@ const TabPanel: React.FC<TabPanelProps> = ({ setCategory, onSearch }) => {
                   ))}
                 </div>
                 <div className="radius-input">
-                  <div className="radius_txt">В Радиусе (км)</div>
+                  <div className="radius_txt">Within A Radius (km)</div>
                   <input
                     className="inputforkm"
                     type="text"
-                    value={radiusInKm.toString()}
+                    value={radiusInKm === 0 ? '' : radiusInKm.toString()}
                     onChange={handleRadiusChange}
                   />
                 </div>
@@ -152,7 +160,7 @@ const TabPanel: React.FC<TabPanelProps> = ({ setCategory, onSearch }) => {
               </>
             ) : (
               <>
-                <div className="favorite">Избранное</div>
+                <div className="favorite">Favorite</div>
                 <Favorite />
               </>
             )}

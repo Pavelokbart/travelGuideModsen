@@ -10,10 +10,12 @@ import L, { LatLngExpression } from 'leaflet';
 import { MarkerData, UserLocation, MapProps } from '../../types';
 import MarkerPopup from '../MarkerPopup/MarkerPopup';
 import LocateUser from '../LocateUser/LocateUser';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRoute, setRouteInfo, clearRoute } from '../../redux/routeSlice';
+import { RootState } from '../../redux/store';
 import museumIconSvg from '../../Icons/museumIcon';
 import religionIconSvg from '../../Icons/religionIcon';
 import parkIconSvg from '../../Icons/parkIcon';
-
 import { fetchMarkers, buildRoute } from '../../utils/apiUtils';
 import { DefaultIcon, CustomIcon } from '../../utils/iconUtils';
 import historicIconSvg from '../../Icons/historicIcon';
@@ -31,12 +33,9 @@ const Map: React.FC<
   }
 > = ({ category, radius, searchResult, userLocation, setUserLocation }) => {
   const [markers, setMarkers] = useState<MarkerData[]>([]);
-  const [route, setRoute] = useState<LatLngExpression[]>([]);
-  const [routeInfo, setRouteInfo] = useState<{
-    distance: number;
-    duration: number;
-  } | null>(null);
-
+  const route = useSelector((state: RootState) => state.route.route);
+  const routeInfo = useSelector((state: RootState) => state.route.routeInfo);
+  const dispatch = useDispatch();
   const searchMarkerRef = useRef<L.Marker | null>(null);
 
   useEffect(() => {
@@ -64,9 +63,8 @@ const Map: React.FC<
     'other',
   ];
 
-  const clearRoute = () => {
-    setRoute([]);
-    setRouteInfo(null);
+  const clearRouteHandler = () => {
+    dispatch(clearRoute());
   };
 
   const getHighestPriorityCategory = (categories: string) => {
@@ -133,14 +131,14 @@ const Map: React.FC<
             name={marker.name}
             position={marker.position}
             xid={marker.id}
-            clearRoute={clearRoute}
+            clearRoute={clearRouteHandler}
             buildRoute={(destination, callback) =>
               buildRoute(
                 userLocation,
                 destination,
                 callback,
-                setRoute,
-                setRouteInfo,
+                (route) => dispatch(setRoute(route)),
+                (info) => dispatch(setRouteInfo(info)),
               )
             }
           />
@@ -165,12 +163,12 @@ const Map: React.FC<
                 userLocation,
                 destination,
                 callback,
-                setRoute,
-                setRouteInfo,
+                (route) => dispatch(setRoute(route)),
+                (info) => dispatch(setRouteInfo(info)),
               )
             }
             xid={searchResult.id}
-            clearRoute={clearRoute}
+            clearRoute={clearRouteHandler}
           />
         </Marker>
       )}

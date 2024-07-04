@@ -59,7 +59,7 @@ const MarkerPopup: React.FC<MarkerPopupProps> = ({
   };
 
   return (
-    <Popup>
+    <Popup className="popup">
       <div className="popup-content">
         <strong>{name}</strong>
         <br />
