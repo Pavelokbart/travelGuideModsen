@@ -128,7 +128,7 @@ const buildRoute = (
 const fetchPlaceDetails = async (
   xid: string,
 ): Promise<DetailedPlaceInfo | null> => {
-  const apiKey = '5ae2e3f221c38a28845f05b692c2b88ed6e6285f06ed260b57075108';
+  const apiKey = process.env.REACT_APP_OPENTRIPMAP_API_KEY;
   const response = await fetch(
     `https://api.opentripmap.com/0.1/en/places/xid/${xid}?apikey=${apiKey}`,
   );
@@ -231,8 +231,8 @@ export const handleSearch = async (
   lat: number,
   lng: number,
   radius: number,
-  apiKey: string,
 ): Promise<MarkerData | null> => {
+  const apiKey = process.env.REACT_APP_OPENTRIPMAP_API_KEY;
   try {
     const response = await fetch(
       `https://api.opentripmap.com/0.1/ru/places/autosuggest?name=${query}&radius=${radius}&lon=${lng}&lat=${lat}&apikey=${apiKey}`,

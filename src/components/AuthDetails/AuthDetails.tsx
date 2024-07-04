@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase';
 import './AuthDetails.css';
+import { SIGN_IN_PATH } from '../../routes';
 
 const AuthDetails: React.FC = () => {
   const [authUser, setAuthUser] = useState<User | null>(null);
@@ -48,7 +49,7 @@ const AuthDetails: React.FC = () => {
         <div className="not-logged-in">
           <p>You are not logged in. Please log in to access your account.</p>
           <button className="login_button">
-            <Link className="auth_link" to="/sign-in">
+            <Link className="auth_link" to={SIGN_IN_PATH}>
               Sign In
             </Link>
           </button>

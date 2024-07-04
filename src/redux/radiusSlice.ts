@@ -1,4 +1,3 @@
-// src/redux/radiusSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface RadiusState {

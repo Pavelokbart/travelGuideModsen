@@ -29,6 +29,7 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '@Icons': path.resolve(__dirname, 'src/Icons'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
     },
   },
   output: {

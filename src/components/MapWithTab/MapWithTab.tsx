@@ -24,8 +24,8 @@ const MapWithTab: React.FC = () => {
     }
 
     const { lat, lng } = userLocation;
-    const apiKey = '5ae2e3f221c38a28845f05b692c2b88ed6e6285f06ed260b57075108';
-    const result = await handleSearch(query, lat, lng, radius, apiKey);
+
+    const result = await handleSearch(query, lat, lng, radius);
 
     setSearchResult(result);
   };

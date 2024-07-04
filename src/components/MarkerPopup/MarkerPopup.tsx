@@ -3,9 +3,10 @@ import { Popup } from 'react-leaflet';
 import './MarkerPopup.css';
 import { MarkerPopupProps } from '../../types';
 import DetailedInfo from '../DetailedInfo/DetailedInfo';
-import { addAttractionToFavorites } from '../../utils/apiUtils';
+
 import { auth } from '../../firebase';
 import Modal from '../Modal/Modal';
+import { addAttractionToFavorites } from '@utils/apiUtils';
 
 const MarkerPopup: React.FC<MarkerPopupProps> = ({
   name,

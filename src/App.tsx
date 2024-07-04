@@ -1,4 +1,3 @@
-// src/App.tsx
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -10,6 +9,13 @@ import SignUp from './components/SignUp/SignUp';
 import AuthDetails from './components/AuthDetails/AuthDetails';
 import { auth } from './firebase';
 import { User } from 'firebase/auth';
+import {
+  ROOT_PATH,
+  SIGN_IN_PATH,
+  SIGN_UP_PATH,
+  AUTH_PATH,
+  MAP_PATH,
+} from './routes';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -27,13 +33,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/"
-            element={user ? <Navigate to="/map" /> : <Navigate to="/sign-in" />}
+            path={ROOT_PATH}
+            element={
+              user ? <Navigate to={MAP_PATH} /> : <Navigate to={SIGN_IN_PATH} />
+            }
           />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/auth" element={<AuthDetails />} />
-          <Route path="/map" element={<MapWithTab />} />
+          <Route path={SIGN_IN_PATH} element={<SignIn />} />
+          <Route path={SIGN_UP_PATH} element={<SignUp />} />
+          <Route path={AUTH_PATH} element={<AuthDetails />} />
+          <Route path={MAP_PATH} element={<MapWithTab />} />
         </Routes>
       </BrowserRouter>
     </Provider>

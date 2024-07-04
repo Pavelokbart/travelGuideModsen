@@ -1,4 +1,3 @@
-// src/redux/routeSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LatLngExpression } from 'leaflet';
 
