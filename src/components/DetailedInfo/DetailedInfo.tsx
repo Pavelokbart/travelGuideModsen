@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { DetailedPlaceInfoProps, DetailedPlaceInfo } from '../../types';
-import { fetchPlaceDetails } from '../../utils/apiUtils';
+import { fetchPlaceDetails } from '@utils/apiUtils';
 import './DetailedInfo.css';
 
 const DetailedInfo: React.FC<DetailedPlaceInfoProps> = ({ xid, onClose }) => {

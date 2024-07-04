@@ -6,7 +6,7 @@ import { MarkerData } from '../../types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { setUserLocation } from '../../redux/userLocationSlice';
-import { handleSearch } from '../../utils/apiUtils';
+import { handleSearch } from '@utils/apiUtils';
 
 const MapWithTab: React.FC = () => {
   const [category, setCategory] = useState<string>('all');

@@ -13,15 +13,15 @@ import LocateUser from '../LocateUser/LocateUser';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRoute, setRouteInfo, clearRoute } from '../../redux/routeSlice';
 import { RootState } from '../../redux/store';
-import museumIconSvg from '../../Icons/museumIcon';
-import religionIconSvg from '../../Icons/religionIcon';
-import parkIconSvg from '../../Icons/parkIcon';
-import { fetchMarkers, buildRoute } from '../../utils/apiUtils';
-import { DefaultIcon, CustomIcon } from '../../utils/iconUtils';
-import historicIconSvg from '../../Icons/historicIcon';
-import industrialIconSvg from '../../Icons/industialIcon';
-import architectureIconSvg from '../../Icons/architectureIcon';
-import otherIconSvg from '../../Icons/otherIcon';
+import museumIconSvg from '@Icons/museumIcon';
+import religionIconSvg from '@Icons/religionIcon';
+import parkIconSvg from '@Icons/parkIcon';
+import { fetchMarkers, buildRoute } from '@utils/apiUtils';
+import { DefaultIcon, CustomIcon } from '@utils/iconUtils';
+import historicIconSvg from '@Icons/historicIcon';
+import industrialIconSvg from '@Icons/industialIcon';
+import architectureIconSvg from '@Icons/architectureIcon';
+import otherIconSvg from '@Icons/otherIcon';
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
