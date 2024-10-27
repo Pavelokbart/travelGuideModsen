@@ -35,11 +35,11 @@ build/
 .npm/
 
 # dotenv environment variables file
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# .env
+# .env.local
+# .env.development.local
+# .env.test.local
+# .env.production.local
 
 # MacOS files
 .DS_Store
