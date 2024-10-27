@@ -64,6 +64,7 @@ export interface DetailedPlaceInfo {
   image?: string;
   wikipedia?: string;
   address?: string;
+  wikidata?: string;
 }
 export interface DetailedPlaceInfoProps {
   xid: string;

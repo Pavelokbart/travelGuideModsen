@@ -41,15 +41,17 @@ const fetchMarkers = async (
   const data: ApiResponse = await response.json();
 
   if (data && data.features) {
-    return data.features.map((feature) => ({
-      id: feature.id,
-      name: feature.properties.name,
-      position: [
-        feature.geometry.coordinates[1],
-        feature.geometry.coordinates[0],
-      ] as LatLngExpression,
-      category: feature.properties.kinds,
-    }));
+    return data.features
+      .filter((feature) => feature.properties.name)
+      .map((feature) => ({
+        id: feature.id,
+        name: feature.properties.name,
+        position: [
+          feature.geometry.coordinates[1],
+          feature.geometry.coordinates[0],
+        ] as LatLngExpression,
+        category: feature.properties.kinds,
+      }));
   }
   console.error('No features found in API response', data);
   return [];
@@ -124,6 +126,43 @@ const buildRoute = (
 
   request.send(body);
 };
+interface WikidataImageInfo {
+  query: {
+    pages: {
+      [key: string]: {
+        imageinfo?: Array<{
+          url: string;
+        }>;
+      };
+    };
+  };
+}
+
+const fetchWikidataImage = async (wikidataId: string) => {
+  try {
+    const response = await fetch(
+      `https://www.wikidata.org/w/api.php?action=wbgetentities&ids=${wikidataId}&format=json&props=claims&origin=*`,
+    );
+    const data = await response.json();
+    const entity = data.entities[wikidataId];
+
+    if (
+      entity &&
+      entity.claims &&
+      entity.claims.P18 &&
+      entity.claims.P18.length > 0
+    ) {
+      const imageFileName = entity.claims.P18[0].mainsnak.datavalue.value;
+      const imageUrl = `https://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=${encodeURIComponent(imageFileName)}`;
+      return imageUrl;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching Wikidata image:', error);
+    return null;
+  }
+};
 
 const fetchPlaceDetails = async (
   xid: string,
@@ -135,11 +174,17 @@ const fetchPlaceDetails = async (
   const data = await response.json();
   console.log(data);
 
+  let wikidataImage = null;
+  if (data.wikidata) {
+    wikidataImage = await fetchWikidataImage(data.wikidata);
+  }
+
   if (data) {
     return {
       name: data.name,
       description: data.info?.descr,
-      image: data.image,
+      image: data.image || wikidataImage,
+      wikidata: data.wikidata,
       wikipedia: data.wikipedia,
       address: data.address?.road
         ? `${data.address.road}, ${data.address.house_number} ${data.address.city}`
@@ -234,10 +279,12 @@ export const handleSearch = async (
 ): Promise<MarkerData | null> => {
   const apiKey = process.env.REACT_APP_OPENTRIPMAP_API_KEY;
   try {
+    const encodedQuery = encodeURIComponent(query);
     const response = await fetch(
-      `https://api.opentripmap.com/0.1/ru/places/autosuggest?name=${query}&radius=${radius}&lon=${lng}&lat=${lat}&apikey=${apiKey}`,
+      `https://api.opentripmap.com/0.1/ru/places/autosuggest?name=${encodedQuery}&radius=${radius}&lon=${lng}&lat=${lat}&apikey=${apiKey}`,
     );
     const data = await response.json();
+    console.log(data);
 
     if (data && data.features && data.features.length > 0) {
       const feature = data.features[0];

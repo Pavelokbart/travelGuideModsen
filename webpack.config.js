@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     static: './public',
-    port: 3000,
+    port: 3002,
     historyApiFallback: true,
   },
   module: {
